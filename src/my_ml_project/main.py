@@ -1,8 +1,11 @@
-import sys
+from fastapi import FastAPI
+from my_ml_project.api.predict import router as predict_router
 
-print("---- SYS.PATH ----")
-for p in sys.path:
-    print(p)
+app = FastAPI()
 
-print("\nCurrent file location:")
-print(__file__)
+app.include_router(predict_router)
+
+@app.get("/")
+def home():
+    return {"message": "Loan Prediction API running"}
+
